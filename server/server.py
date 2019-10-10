@@ -1,5 +1,6 @@
 #!flask/bin/python
 import socket
+import device_pb2 
 from flask import Flask
 from flask import jsonify
 
@@ -17,5 +18,9 @@ origUdp = (host, port)
 udp.bind(origUdp)
 
 while True:
+	print ("Listening")
+
     msg, disp = udp.recvfrom(1024) # Gets the IP of the dispositive
     msg = msg.decode() # Gets info from the dispositive
+    msg.ParseFromString(msg) # Parse the protobuf binary message
+	dispositive.append(msg); # Add the dispositive to the vector
