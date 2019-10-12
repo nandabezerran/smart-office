@@ -1,0 +1,11 @@
+syntax = "proto2";
+
+message TvDevice {
+  required string id = 1;
+  required string status = 2;
+  required string channel = 3;
+  required string volume = 4;
+  required string port = 5;
+  required string ip = 6;
+
+}

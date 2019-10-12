@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
-
-#header{
+#header {
     background-color: #D2E3C4;
     font-family: 'Playfair Display';
     align-items: center;
@@ -18,9 +17,10 @@ a:hover {
 
 body {
     margin: 0;
-    background-image: url('img/bg.png');
+    /* background-image: url('../img/bg.png'); */
+    background-color: #818579;
     background-attachment: fixed;
-} 
+}
 
 #titulo {
     font-size: 150%;
@@ -29,4 +29,29 @@ body {
 img {
     width: 200px;
     height: 200px;
+}
+
+.card {
+    border-radius: 20px;
+    background-color: #eee !important;
+    border: 2px solid #D2E3C4;
+    padding: 2%;
+    margin-top: 8%;
+}
+
+.img_devices {
+    margin: auto;
+}
+
+.acoes {
+    margin-top: 5px;
+}
+
+.btn {
+    margin-left: 3%;
+}
+
+.input-group-text {
+    display: inline;
+    margin-left: 3%;
 }
