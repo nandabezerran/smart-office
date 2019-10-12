@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display&display=swap');
+
+#header{
+    background-color: #D2E3C4;
+    font-family: 'Playfair Display';
+    align-items: center;
+    color: #818479;
+}
+
+a {
+    text-decoration: none !important;
+    color: #818579;
+}
+
+a:hover {
+    color: #B5CBB7;
+}
+
+body {
+    margin: 0;
+    background-image: url('img/bg.png');
+    background-attachment: fixed;
+} 
+
+#titulo {
+    font-size: 150%;
+}
+
+img {
+    width: 200px;
+    height: 200px;
+}
