@@ -77,11 +77,11 @@ import socket
 # The connection with the client will be made with the flask routes, not by the pure TCP socket.
 # The sockets here are only for the connections with the dispositives that are made with UDP
 server_ip = socket.gethostbyname(socket.gethostname())
-server_port = 5000
+server_port = 3000
 server_addr = (server_ip, int(server_port))
 
 host_broadcast = '255.255.255.255'
-port_broadcast = 9434
+port_broadcast = 5000
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -96,11 +96,14 @@ print("server criado")
 msg = "ssssss"
 
 try:
+
+    sock.sendto(msg.encode(), broacast_addr)
+
     while True:
         print("etrou")
-        sent = sock.sendto(msg.encode(), broacast_addr)
-        data, client = sock.recvfrom(4096)
-        print(data.decode('UTF-8'))
+        data, client = sock.recvfrom(1024)
+        print(data)
+        print(client)
         sock.sendto(msg.encode(), client)
 
 finally:
