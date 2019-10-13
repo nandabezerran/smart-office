@@ -56,30 +56,32 @@ function search_devices() {
         },
         success: function(msg) {
             // TODO: copiar o conteudo do protocol buffer pro array de devices
-            devices = msg //JSON.parse(msg);  //TODO: possivel mudanças
-            console.log(devices)
+            devices = msg; //JSON.parse(msg);  //TODO: possivel mudanças
+            $("#root").html('<button id="search_devices" type="button" class="btn btn-success" onclick="search_devices()"><i class="fas fa-search"></i></button><br />');
+            console.log(devices);
             atualizar_tela();
         }
     });
 };
 
-function setStatus(id, status) {
+function setStatus(e, id) {
+    var status = e.target.value;
     devices.forEach((device, index) => {
         if (device["id"] == id) {
             device.acoes.status = status;
-
-            console.log($("#" + id).find(".change_status"));
-            // $.ajax({
-            //     type: "PUT",
-            //     url: server + id + "/" + status,
-            //     dataType: "json",
-            //     data: device, //JSON.stringify(device), //TODO: talvez precise mudar
-            //     success: function(msg) {
-            //         // TODO: copiar o conteudo do protocol buffer pro array de devices
-            //         // devices = ;
-            //         atualizar_tela();
-            //     }
-            // });
+            $.ajax({
+                headers: { "Accept": "application/json" },
+                type: "PUT",
+                url: server + id + "/" + status,
+                crossDomain: true,
+                dataType: "json",
+                data: device, //JSON.stringify(device), //TODO: talvez precise mudar
+                success: function(msg) {
+                    // TODO: copiar o conteudo do protocol buffer pro array de devices
+                    // devices = ;
+                    atualizar_tela();
+                }
+            });
         }
     });
 };
@@ -171,12 +173,12 @@ function gerar_componente_device(device, id_linha) {
             "<p><strong>STATUS:</strong><span class='change_status'> " + device.acoes.status + "</span></p>" +
             "</div>" +
             "<div>" +
-            "<h3 >Ações:</h3>" +
+            "<h3 class='text-center'>Ações:</h3>" +
             "<div class='acoes'>" +
             "<label>Status: </label>" +
             "<span>" +
-            "<button type='button' class='btn btn-warning btn-sm' onclick='setStatus(" + device.id + ", " + ligado + ")'>Ligar</button>" + //TODO: botar onchange/onclick
-            "<button type='button' class='btn btn-dark btn-sm' onclick='setStatus(" + device.id + ", " + desligado + ")'>Desligar</button>" + //TODO: botar onchange/onclick
+            "<button type='button' class='btn btn-warning btn-sm' onclick='setStatus(event, " + device.id + ")'>Ligar</button>" + //TODO: botar onchange/onclick
+            "<button type='button' class='btn btn-dark btn-sm' onclick='setStatus(event, " + device.id + ")'>Desligar</button>" + //TODO: botar onchange/onclick
             "</span>" +
             "</div>" +
             "<div class='acoes'>" +
@@ -188,13 +190,13 @@ function gerar_componente_device(device, id_linha) {
         );
     } else if (device.tipo === 'Lâmpada') {
         $("#" + id_linha).append("<div class='col-md-4 mx-auto card' id='" + device.id + "'>" +
-            "<img src = './img/lampada.png' class='img_devices'>" +
+            "<img src = './img/lampada.jpeg' class='img_devices'>" +
             "<div>" +
             "<h3 class='text-center'>" + device.tipo + "</h3></br>" +
             "<p><strong>STATUS:</strong><span id='change_status'> " + device.acoes.status + "</span></p>" +
             "</div>" +
             "<div>" +
-            "<h3 >Ações:</h3>" +
+            "<h3 class='text-center'>Ações:</h3>" +
             "<div class='acoes'>" +
             "<label>Status: </label>" +
             "<span>" +
@@ -213,7 +215,7 @@ function gerar_componente_device(device, id_linha) {
             "<p><strong>STATUS:</strong><span id='change_status'> " + device.acoes.status + "</span></p>" +
             "</div>" +
             "<div>" +
-            "<h3 >Ações:</h3>" +
+            "<h3 class='text-center'>Ações:</h3>" +
             "<div class='acoes'>" +
             "<label>Status: </label>" +
             "<span>" +
