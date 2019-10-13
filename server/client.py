@@ -13,9 +13,8 @@ x = {"tipo": "Ar-condicionado", "ip": "adosihdaiosddios", "id": "1", "porta": 50
 client.bind((host, port))
 
 while True:
-    msg = input("Servidor 1")
+    print('Esperando conexão...')
     rsp, server = client.recvfrom(1024)
-    print(rsp)
-    print(server)
+    print(rsp.decode() + " ---> "+ str(server[0]) + ", " + str(server[1]))
     client.sendto(json.dumps(x).encode(), server)
 

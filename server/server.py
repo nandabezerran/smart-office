@@ -1,26 +1,13 @@
 #!flask/bin/python
 import socket
-import json
 from flask import Flask, request, jsonify
 import collections
 import json
-from flask_cors import CORS
+#from flask_cors import CORS
 
-
+#CORS(app)
 
 app = Flask(__name__)
-CORS(app)
-
-devices = []
-
-
-@app.route('/', methods=['GET'])
-def hello_world():
-    teste = jsonify({"teste":"cu"})
-    print(type(teste))
-    return teste
-
-
 @app.route('/getDevices', methods=['GET'])
 def get_devices():
     resultado = []
@@ -95,44 +82,41 @@ def change_volume(id, new_volume):
 #   sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
 #   sock.sendto(jsonify(resultList), (device.ip, device.port))
 
-
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port='5000', debug=True)
+    def decode_json(msg):
+        device = json.loads(msg)
+        devices.append(device)
+
+    devices = []
+    server_ip = socket.gethostbyname(socket.gethostname())
+    server_port = 3000
+    server_addr = (server_ip, int(server_port))
+
+    broadcast_ip = '255.255.255.255'
+    broadcast_port = 5000
+
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+
+    broacast_addr = (broadcast_ip, broadcast_port)
+
+    sock.bind(server_addr)
+
+    msg = "Solicitando conexao..."
+
+    try:
+        sock.sendto(msg.encode(), broacast_addr)
+
+        while True:
+            data, client = sock.recvfrom(1024)
+            decode_json(data.decode())
+            print(devices[0])
+            app.run(host='127.0.0.1', port='5000', debug=True)
 
 
-def decode_json(msg):
-    device = json.loads(msg)
-    devices.append(device)
-
-
-server_ip = socket.gethostbyname(socket.gethostname())
-server_port = 3000
-server_addr = (server_ip, int(server_port))
-
-broadcast_ip = '255.255.255.255'
-broadcast_port = 5000
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-
-broacast_addr = (broadcast_ip, broadcast_port)
-
-sock.bind(server_addr)
-
-msg = "Solicitando conexao..."
-
-try:
-
-    sock.sendto(msg.encode(), broacast_addr)
-
-    while True:
-        data, client = sock.recvfrom(1024)
-        decode_json(data.decode())
-        print(devices[0])
-
-finally:
-	sock.close()
+    finally:
+        sock.close()
 
 
 
