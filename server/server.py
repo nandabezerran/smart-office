@@ -2,6 +2,7 @@
 import socket
 from flask import Flask, request, jsonify
 import collections
+from threading import Timer
 import json
 #from flask_cors import CORS
 
@@ -85,6 +86,9 @@ def change_volume(id, new_volume):
 if __name__ == '__main__':
     def decode_json(msg):
         device = json.loads(msg)
+        for dev in devices:
+            if (device['ip'] == dev['ip']):
+                return
         devices.append(device)
 
     app.run(host='127.0.0.1', port='2000', debug=True)
@@ -106,12 +110,11 @@ if __name__ == '__main__':
 
     msg = "Solicitando conexao..."
 
-    sock.sendto(msg.encode(), broacast_addr)
-
     while True:
+        sock.sendto(msg.encode(), broacast_addr)
         data, client = sock.recvfrom(1024)
         decode_json(data.decode())
-        print(devices[0])
+        print(len(devices))
 
 
 
