@@ -6,7 +6,7 @@ port = 5000
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 client.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 addr = (host, int(port))
-x = {"tipo": "Ar-condicionado", "ip": "adosihdaiosddios", "id": "1", "porta": 5000,
+x = {"tipo": "Ar-condicionado", "ip": host, "id": "1", "porta": port,
      "acoes": {"status": "Ligado",
                "temperatura": 30}}
 

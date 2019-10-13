@@ -87,6 +87,7 @@ if __name__ == '__main__':
         device = json.loads(msg)
         devices.append(device)
 
+    app.run(host='127.0.0.1', port='2000', debug=True)
     devices = []
     server_ip = socket.gethostbyname(socket.gethostname())
     server_port = 3000
@@ -105,18 +106,16 @@ if __name__ == '__main__':
 
     msg = "Solicitando conexao..."
 
-    try:
-        sock.sendto(msg.encode(), broacast_addr)
+    sock.sendto(msg.encode(), broacast_addr)
 
-        while True:
-            data, client = sock.recvfrom(1024)
-            decode_json(data.decode())
-            print(devices[0])
-            app.run(host='127.0.0.1', port='5000', debug=True)
+    while True:
+        data, client = sock.recvfrom(1024)
+        decode_json(data.decode())
+        print(devices[0])
 
 
-    finally:
-        sock.close()
+
+
 
 
 
