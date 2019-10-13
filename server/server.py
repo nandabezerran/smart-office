@@ -33,7 +33,7 @@ def change_status(id, new_status):
     return json.dumps(dev, separators=(',', ':'))
 #   Atualizar status do device
 #   sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-#   sock.sendto(jsonify(resultList), (device.ip, device.port))
+#   sock.sendto(dev, (device.ip, device.port))
 
 
 @app.route('/changeTemp/<string:id>/<string:new_temp>', methods=["PUT"])
@@ -49,7 +49,7 @@ def change_temperatura(id, new_temp):
     return json.dumps(dev, separators=(',', ':'))
 #   Atualizar status do device
 #   sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-#   sock.sendto(jsonify(resultList), (device.ip, device.port))
+#   sock.sendto(dev, (device.ip, device.port))
 
 
 @app.route('/changeCanal/<string:id>/<string:new_canal>', methods=["PUT"])
@@ -65,7 +65,7 @@ def change_canal(id, new_canal):
     return json.dumps(dev, separators=(',', ':'))
 #   Atualizar status do device
 #   sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-#   sock.sendto(jsonify(resultList), (device.ip, device.port))
+#   sock.sendto(dev, (device.ip, device.port))
 
 
 @app.route('/changeVolume/<string:id>/<string:new_volume>', methods=["PUT"])
@@ -81,7 +81,7 @@ def change_volume(id, new_volume):
     return json.dumps(dev, separators=(',', ':'))
 #   Atualizar status do device
 #   sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-#   sock.sendto(jsonify(resultList), (device.ip, device.port))
+#   sock.sendto(dev, (device.ip, device.port))
 
 if __name__ == '__main__':
     def decode_json(msg):
@@ -110,8 +110,15 @@ if __name__ == '__main__':
 
     msg = "Solicitando conexao..."
 
-    while True:
+
+    def send_broadcast():
         sock.sendto(msg.encode(), broacast_addr)
+
+    sock.sendto(msg.encode(), broacast_addr)
+
+    while True:
+        t = Timer(10.0, send_broadcast())
+        t.start()
         data, client = sock.recvfrom(1024)
         decode_json(data.decode())
         print(len(devices))
