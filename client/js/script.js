@@ -1,56 +1,63 @@
 //TODO: Possiveis mudanças nos tipos de envio e recebimento das msgs
-var devices = [{
-        "tipo": "Ar-condicionado",
-        "ip": "adosihdaiosddios",
-        "id": "1",
-        "porta": 3000,
-        "acoes": {
-            "status": "Ligado",
-            "temperatura": 30,
-        }
-    },
-    {
-        "tipo": "TV",
-        "ip": "adosihdaiosddios",
-        "id": "2",
-        "porta": 3000,
-        "acoes": {
-            "status": "Ligado",
-            "canal": 30,
-            "volume": 20
-        }
-    },
-    {
-        "tipo": "Lâmpada",
-        "ip": "adosihdaiosddios",
-        "id": "3",
-        "porta": 3000,
-        "acoes": {
-            "status": "Ligado",
-        }
-    },
-    {
-        "tipo": "Lâmpada",
-        "ip": "adosihdaiosddios",
-        "id": "5",
-        "porta": 3000,
-        "acoes": {
-            "status": "Desligado", // true: ligado e false: desligado
-        }
-    },
+// var devices = [{
+//         "tipo": "Ar-condicionado",
+//         "ip": "adosihdaiosddios",
+//         "id": "1",
+//         "porta": 3000,
+//         "acoes": {
+//             "status": "Ligado",
+//             "temperatura": 30,
+//         }
+//     },
+//     {
+//         "tipo": "TV",
+//         "ip": "adosihdaiosddios",
+//         "id": "2",
+//         "porta": 3000,
+//         "acoes": {
+//             "status": "Ligado",
+//             "canal": 30,
+//             "volume": 20
+//         }
+//     },
+//     {
+//         "tipo": "Lâmpada",
+//         "ip": "adosihdaiosddios",
+//         "id": "3",
+//         "porta": 3000,
+//         "acoes": {
+//             "status": "Ligado",
+//         }
+//     },
+//     {
+//         "tipo": "Lâmpada",
+//         "ip": "adosihdaiosddios",
+//         "id": "5",
+//         "porta": 3000,
+//         "acoes": {
+//             "status": "Desligado", // true: ligado e false: desligado
+//         }
+//     },
 
-];
-
-const server = "localhost:3000/server/"; //TODO: mudar dados do server aqui
+// ];
+var devices = [];
+const server = "localhost:5000/"; //TODO: mudar dados do server aqui
 
 function search_devices() {
     $.ajax({
+        headers: { "Accept": "application/json" },
         type: "GET",
-        url: server + "getDevices",
-        dataType: "json",
+        crossDomain: true,
+        url: "http://localhost:5000/getDevices",
+        contentType: 'application/json',
+        dataType: 'json',
+        beforeSend: function(xhr) {
+            xhr.withCredentials = true;
+        },
         success: function(msg) {
             // TODO: copiar o conteudo do protocol buffer pro array de devices
-            devices = msg.devices //JSON.parse(msg);  //TODO: possivel mudanças
+            devices = msg //JSON.parse(msg);  //TODO: possivel mudanças
+            console.log(devices)
             atualizar_tela();
         }
     });
