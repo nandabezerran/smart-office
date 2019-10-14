@@ -30,10 +30,9 @@ def change_status(id, new_status):
             device["acoes"]["status"] = str(new_status)
             dev = device
             dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
+            sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
+            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
     return json.dumps(dev, separators=(',', ':'))
-#   Atualizar status do device
-#   sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-#   sock.sendto(dev, (device.ip, device.port))
 
 
 @app.route('/changeTemp/<string:id>/<string:new_temp>', methods=["PUT"])
@@ -46,11 +45,9 @@ def change_temperatura(id, new_temp):
             device["acoes"]["temperatura"] = str(new_temp)
             dev = device
             dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
+            sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
+            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
     return json.dumps(dev, separators=(',', ':'))
-#   Atualizar status do device
-#   sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-#   sock.sendto(dev, (device.ip, device.port))
-
 
 @app.route('/changeCanal/<string:id>/<string:new_canal>', methods=["PUT"])
 def change_canal(id, new_canal):
@@ -62,10 +59,9 @@ def change_canal(id, new_canal):
             device["acoes"]["status"] = str(new_canal)
             dev = device
             dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
+            sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
+            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
     return json.dumps(dev, separators=(',', ':'))
-#   Atualizar status do device
-#   sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-#   sock.sendto(dev, (device.ip, device.port))
 
 
 @app.route('/changeVolume/<string:id>/<string:new_volume>', methods=["PUT"])
@@ -78,10 +74,10 @@ def change_volume(id, new_volume):
             device["acoes"]["volume"] = str(new_volume)
             dev = device
             dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
     return json.dumps(dev, separators=(',', ':'))
-#   Atualizar status do device
-#   sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-#   sock.sendto(dev, (device.ip, device.port))
+
 
 if __name__ == '__main__':
     def decode_json(msg):
