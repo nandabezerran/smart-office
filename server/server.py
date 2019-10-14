@@ -117,7 +117,7 @@ if __name__ == '__main__':
     sock.sendto(msg.encode(), broacast_addr)
 
     while True:
-        t = Timer(10.0, send_broadcast())
+        t = Timer(10.0, send_broadcast)
         t.start()
         data, client = sock.recvfrom(1024)
         decode_json(data.decode())
