@@ -1,7 +1,10 @@
+body,
+#header {
+    font-family: "Source Sans Pro", "Roboto", sans-serif;
+}
 
 #header {
     background-color: #6f0aaa;
-    font-family: 'Playfair Display';
     align-items: center;
     color: white;
 }
@@ -46,8 +49,12 @@ img {
     margin: auto;
 }
 
-.acoes {
-    margin-top: 5px;
+.acoes label {
+    margin-top: 15px;
+}
+
+.acoes input {
+    margin-left: 5%;
 }
 
 .btn {
@@ -57,4 +64,16 @@ img {
 .input-group-text {
     display: inline;
     margin-left: 3%;
+}
+
+#search_devices {
+    margin-left: 40%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+
+.tipo-device {
+    text-transform: uppercase;
+    margin-top: 10%;
+    font-weight: bold;
 }

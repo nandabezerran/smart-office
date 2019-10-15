@@ -41,24 +41,22 @@
 
 // ];
 var devices = [];
-const server = "localhost:5000/"; //TODO: mudar dados do server aqui
+const server = "localhost:2000/"; //TODO: mudar dados do server aqui
 
 function search_devices() {
     $.ajax({
         headers: { "Accept": "application/json" },
         type: "GET",
         crossDomain: true,
-        url: "http://localhost:5000/getDevices",
+        url: "http://localhost:2000/getDevices",
         contentType: 'application/json',
         dataType: 'json',
         beforeSend: function(xhr) {
             xhr.withCredentials = true;
         },
         success: function(msg) {
-            // TODO: copiar o conteudo do protocol buffer pro array de devices
             devices = msg; //JSON.parse(msg);  //TODO: possivel mudanças
-            $("#root").html('<button id="search_devices" type="button" class="btn btn-success" onclick="search_devices()"><i class="fas fa-search"></i></button><br />');
-            console.log(devices);
+            $("#root").html('<button id="search_devices" type="button" class="btn btn-success text-center" onclick="search_devices()"><strong>Procurar novos dispositivos</strong>      <i class="fas fa-search"></i></button>');
             atualizar_tela();
         }
     });
@@ -72,14 +70,19 @@ function setStatus(e, id) {
             $.ajax({
                 headers: { "Accept": "application/json" },
                 type: "PUT",
-                url: server + id + "/" + status,
+                url: 'http://localhost:2000/changeStatus/' + id + "/" + status,
                 crossDomain: true,
                 dataType: "json",
-                data: device, //JSON.stringify(device), //TODO: talvez precise mudar
+                data: device,
+                contentType: 'application/json',
+                dataType: 'json',
+                beforeSend: function(xhr) {
+                    xhr.withCredentials = true;
+                },
                 success: function(msg) {
-                    // TODO: copiar o conteudo do protocol buffer pro array de devices
-                    // devices = ;
-                    atualizar_tela();
+                    console.log(msg);
+                    $("#" + id).find(".change_status")[0].innerHTML = "  " + status;
+                    // atualizar_tela();
                 }
             });
         }
@@ -88,21 +91,26 @@ function setStatus(e, id) {
 
 function setCanal(e, id) {
     var canal = e.target.value;
-
+    // console.log(canal);
     devices.forEach((device, index) => {
         if (device["id"] == id) {
             device.acoes.canal = canal;
-            // $.ajax({
-            //     type: "PUT",
-            //     url: server + id + "/" + status,
-            //     dataType: "json",
-            //     data: device, //JSON.stringify(device), //TODO: talvez precise mudar
-            //     success: function(msg) {
-            //         // TODO: copiar o conteudo do protocol buffer pro array de devices
-            //         // devices = ;
-            //         atualizar_tela();
-            //     }
-            // });
+            $.ajax({
+                headers: { "Accept": "application/json" },
+                type: "PUT",
+                url: 'http://localhost:2000/changeCanal/' + id + "/" + canal,
+                crossDomain: true,
+                dataType: "json",
+                data: device,
+                contentType: 'application/json',
+                dataType: 'json',
+                beforeSend: function(xhr) {
+                    xhr.withCredentials = true;
+                },
+                success: function(msg) {
+                    // console.log(msg);
+                }
+            });
         }
     });
 };
@@ -113,17 +121,22 @@ function setVolume(e, id) {
     devices.forEach((device, index) => {
         if (device["id"] == id) {
             device.acoes.volume = volume;
-            // $.ajax({
-            //     type: "PUT",
-            //     url: server + id + "/" + status,
-            //     dataType: "json",
-            //     data: device, //JSON.stringify(device), //TODO: talvez precise mudar
-            //     success: function(msg) {
-            //         // TODO: copiar o conteudo do protocol buffer pro array de devices
-            //         // devices = ;
-            //         atualizar_tela();
-            //     }
-            // });
+            $.ajax({
+                headers: { "Accept": "application/json" },
+                type: "PUT",
+                url: 'http://localhost:2000/changeVolume/' + id + "/" + volume,
+                crossDomain: true,
+                dataType: "json",
+                data: device,
+                contentType: 'application/json',
+                dataType: 'json',
+                beforeSend: function(xhr) {
+                    xhr.withCredentials = true;
+                },
+                success: function(msg) {
+                    console.log(msg);
+                }
+            });
         }
     });
 };
@@ -134,17 +147,22 @@ function setTemperatura(e, id) {
     devices.forEach((device, index) => {
         if (device["id"] == id) {
             device.acoes.temperatura = temperatura;
-            // $.ajax({
-            //     type: "PUT",
-            //     url: server + id + "/" + status,
-            //     dataType: "json",
-            //     data: device, //JSON.stringify(device), //TODO: talvez precise mudar
-            //     success: function(msg) {
-            //         // TODO: copiar o conteudo do protocol buffer pro array de devices
-            //         // devices = ;
-            //         atualizar_tela();
-            //     }
-            // });
+            $.ajax({
+                headers: { "Accept": "application/json" },
+                type: "PUT",
+                url: 'http://localhost:2000/changeTemp/' + id + "/" + temperatura,
+                crossDomain: true,
+                dataType: "json",
+                data: device,
+                contentType: 'application/json',
+                dataType: 'json',
+                beforeSend: function(xhr) {
+                    xhr.withCredentials = true;
+                },
+                success: function(msg) {
+                    console.log(msg);
+                }
+            });
         }
     });
 };
@@ -165,70 +183,70 @@ function gerar_componente_device(device, id_linha) {
     var desligado = "Desligado";
 
     if (device.tipo === 'Ar-condicionado') {
-        $("#" + id_linha).append("<div class='col-md-4 mx-auto card' id='" + device.id + "'>" +
+        $("#" + id_linha).append("<div class='col-md-5 mx-auto card' id='" + device.id + "'>" +
             // "<div class='row'>" +
             "<img src = './img/ar-condicionado.png' class='img_devices'>" +
             "<div>" +
-            "<h3 class='text-center'>" + device.tipo + "</h3></br>" +
+            "<h3 class='text-center tipo-device'>" + device.tipo + "</h3></br>" +
             "<p><strong>STATUS:</strong><span class='change_status'> " + device.acoes.status + "</span></p>" +
             "</div>" +
             "<div>" +
-            "<h3 class='text-center'>Ações:</h3>" +
+            "<h3 class='text-center'><strong>AÇÕES</strong></h3>" +
             "<div class='acoes'>" +
-            "<label>Status: </label>" +
+            "<label><strong>STATUS:</strong> </label>" +
             "<span>" +
-            "<button type='button' class='btn btn-warning btn-sm' onclick='setStatus(event, " + device.id + ")'>Ligar</button>" + //TODO: botar onchange/onclick
-            "<button type='button' class='btn btn-dark btn-sm' onclick='setStatus(event, " + device.id + ")'>Desligar</button>" + //TODO: botar onchange/onclick
+            "<button type='button' class='btn btn-warning btn-sm' value='Ligado' onclick='setStatus(event, " + device.id + ")'>Ligar</button>" + //TODO: botar onchange/onclick
+            "<button type='button' class='btn btn-danger btn-sm' value='Desligado' onclick='setStatus(event, " + device.id + ")'>Desligar</button>" + //TODO: botar onchange/onclick
             "</span>" +
             "</div>" +
             "<div class='acoes'>" +
-            "<label for='temperatura'>Temperatura: </label>" +
+            "<label for='temperatura'><strong>TEMPERATURA:</strong> </label>" +
             "<input type='number' class='input-group-text ' max='30' min='17' name='temperatura' value=" + device.acoes.temperatura + " oninput='setTemperatura(event, " + device.id + ")'></input>" + //TODO: botar oninput
             "</div>" +
             "</div>" +
             "</div>"
         );
     } else if (device.tipo === 'Lâmpada') {
-        $("#" + id_linha).append("<div class='col-md-4 mx-auto card' id='" + device.id + "'>" +
-            "<img src = './img/lampada.jpeg' class='img_devices'>" +
+        $("#" + id_linha).append("<div class='col-md-5 mx-auto card' id='" + device.id + "'>" +
+            "<img src = './img/lampada.png' class='img_devices'>" +
             "<div>" +
-            "<h3 class='text-center'>" + device.tipo + "</h3></br>" +
-            "<p><strong>STATUS:</strong><span id='change_status'> " + device.acoes.status + "</span></p>" +
+            "<h3 class='text-center tipo-device'>" + device.tipo + "</h3></br>" +
+            "<p><strong>STATUS:</strong><span class='change_status'> " + device.acoes.status + "</span></p>" +
             "</div>" +
             "<div>" +
-            "<h3 class='text-center'>Ações:</h3>" +
+            "<h3 class='text-center'><strong>AÇÕES</strong></h3>" +
             "<div class='acoes'>" +
-            "<label>Status: </label>" +
+            "<label><strong>STATUS:</strong> </label>" +
             "<span>" +
             "<button type='button' class='btn btn-warning btn-sm' value = 'Ligado' onclick='setStatus(event, " + device.id + ")'>Ligar</button>" + //TODO: botar onchange/onclick
-            "<button type='button' class='btn btn-dark btn-sm' value = 'Desligado' onclick='setStatus(event, " + device.id + ")'>Desligar</button>" + //TODO: botar onchange/onclick
+            "<button type='button' class='btn btn-danger btn-sm' value = 'Desligado' onclick='setStatus(event, " + device.id + ")'>Desligar</button>" + //TODO: botar onchange/onclick
             "</span>" +
             "</div>" +
             "</div>" +
             "</div>"
         );
     } else if (device.tipo === 'TV') {
-        $("#" + id_linha).append("<div class='col-md-4 mx-auto card' id='" + device.id + "'>" +
+        $("#" + id_linha).append("<div class='col-md-5 mx-auto card' id='" + device.id + "'>" +
             "<img src = './img/tv.png' class='img_devices'>" +
             "<div>" +
-            "<h3 class='text-center'>" + device.tipo + "</h3></br>" +
-            "<p><strong>STATUS:</strong><span id='change_status'> " + device.acoes.status + "</span></p>" +
+            "<h3 class='text-center tipo-device'>" + device.tipo + "</h3></br>" +
+            "<p><strong>STATUS:</strong><span class='change_status'> " + device.acoes.status + "</span></p>" +
             "</div>" +
             "<div>" +
-            "<h3 class='text-center'>Ações:</h3>" +
+            "<h3 class='text-center'><strong>AÇÕES</strong></h3>" +
             "<div class='acoes'>" +
-            "<label>Status: </label>" +
+            "<label><strong>STATUS:</strong></label>" +
             "<span>" +
             "<button type='button' class='btn btn-warning btn-sm' value = 'Ligado' onclick='setStatus(event," + device.id + ")'>Ligar</button>" + //TODO: botar onchange/onclick
-            "<button type='button' class='btn btn-dark btn-sm' value='Desligado' onclick='setStatus(event," + device.id + ")'>Desligar</button>" + //TODO: botar onchange/onclick
+            "<button type='button' class='btn btn-danger btn-sm' value='Desligado' onclick='setStatus(event," + device.id + ")'>Desligar</button>" + //TODO: botar onchange/onclick
             "</span>" +
             "</div>" +
             "<div class='acoes'>" +
-            "<label for='volume'>Volume: </label>" +
+            "<label for='volume'><strong>VOLUME:</strong> </label>" +
             "<input type='number' class='input-group-text ' max='100' min='0' name='volume' value=" + device.acoes.volume + "  oninput='setVolume(event," + device.id + ")'></input>" + //TODO: botar oninput
             "</div>" +
             "<div class='acoes'>" +
-            "<label for='canal'>Canal: </label>" +
+            "<label for='canal'><strong>CANAL:</strong> </label>" +
             "<input type='number' class='input-group-text ' max='50' min='2' name='canal' value=" + device.acoes.canal + "  oninput='setCanal(event," + device.id + ")'></input>" + //TODO: botar oninput
             "</div>" +
             "</div>" +
@@ -237,9 +255,6 @@ function gerar_componente_device(device, id_linha) {
     }
 
 }
-
-
-$("#root").append("<p>CU</p>");
 $(document).ready(function() {
     atualizar_tela();
 });
