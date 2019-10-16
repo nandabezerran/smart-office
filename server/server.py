@@ -4,108 +4,78 @@ from flask import Flask, request, jsonify
 import collections
 from threading import Timer
 import json
-from flask_cors import CORS
-import copy 
+#from flask_cors import CORS
+
+#CORS(app)
+
 app = Flask(__name__)
-CORS(app)
-
-
-devices = [{
-        "tipo": "Ar-condicionado",
-        "ip": "adosihdaiosddios",
-        "id": "1",
-        "porta": 3000,
-        "acoes": {
-            "status": "Ligado",
-            "temperatura": 30,
-        }
-    },{
-        "tipo": "TV",
-        "ip": "adosihdaiosddios",
-        "id": "2",
-        "porta": 3000,
-        "acoes": {
-            "status": "Ligado",
-            "canal": 30,
-            "volume": 20
-        }
-    },{
-        "tipo": "Lâmpada",
-        "ip": "adosihdaiosddios",
-        "id": "3",
-        "porta": 3000,
-        "acoes": {
-            "status": "Ligado",
-        }
-    },{
-        "tipo": "Lâmpada",
-        "ip": "adosihdaiosddios",
-        "id": "5",
-        "porta": 3000,
-        "acoes": {
-            "status": "Desligado"
-        }
-    }]
-
-
 @app.route('/getDevices', methods=['GET'])
 def get_devices():
     resultado = []
     for device in devices:
         dev = device
+        # dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
         resultado.append(dev)
+    # return json.dumps(resultado, separators=(',', ':'))
     return jsonify(resultado)
 
 
 @app.route('/changeStatus/<string:id>/<string:new_status>', methods=["PUT"])
 def change_status(id, new_status):
     dev = None
+    # print(new_status)
     for device in devices:
         if(device['id'] == id):
+            # print(device["acoes"])
             device["acoes"]["status"] = str(new_status)
-            dev = copy.copy(device)
+            dev = device
             dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
-            # sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-            # sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
+            sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
+            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
     return json.dumps(dev, separators=(',', ':'))
 
 
 @app.route('/changeTemp/<string:id>/<string:new_temp>', methods=["PUT"])
 def change_temperatura(id, new_temp):
     dev = None
-    print(new_temp)
+    # print(new_status)
     for device in devices:
         if(device['id'] == id):
+            # print(device["acoes"])
             device["acoes"]["temperatura"] = str(new_temp)
-            dev = copy.copy(device)
+            dev = device
             dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
-            # sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-            # sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
+            sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
+            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
     return json.dumps(dev, separators=(',', ':'))
 
 @app.route('/changeCanal/<string:id>/<string:new_canal>', methods=["PUT"])
 def change_canal(id, new_canal):
     dev = None
+    # print(new_status)
     for device in devices:
         if(device['id'] == id):
-            device["acoes"]["canal"] = str(new_canal)
-            dev = copy.copy(device)
+            # print(device["acoes"])
+            device["acoes"]["status"] = str(new_canal)
+            dev = device
             dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
-            # sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-            # sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
+            sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
+            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
     return json.dumps(dev, separators=(',', ':'))
 
 
 @app.route('/changeVolume/<string:id>/<string:new_volume>', methods=["PUT"])
 def change_volume(id, new_volume):
     dev = None
+    # print(new_status)
     for device in devices:
         if(device['id'] == id):
+            # print(device["acoes"])
             device["acoes"]["volume"] = str(new_volume)
-            dev = copy.copy(device)
+            dev = device
             dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
-            # sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            # sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
+            sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
     return json.dumps(dev, separators=(',', ':'))
 
 
@@ -147,7 +117,13 @@ if __name__ == '__main__':
         t.start()
         data, client = sock.recvfrom(1024)
         decode_json(data.decode())
-        print(len(devices))
+        print(data.decode())
+        id = json.loads(data.decode())['id']
+        ip = json.loads(data.decode())["ip"]
+        port = json.loads(data.decode())['porta']
+        print("Deu certo conectar com o cliente" + str(id) + " no endereço " + str(ip) + " , " + str(port))
+        msg2 = "Conexão estabelecida na nova porta"
+        sock.sendto(msg2.encode(), (json.loads(data.decode())["ip"], json.loads(data.decode())['porta']))
 
 
 
