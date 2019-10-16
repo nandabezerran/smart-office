@@ -108,7 +108,7 @@ function setCanal(e, id) {
                     xhr.withCredentials = true;
                 },
                 success: function(msg) {
-                    // console.log(msg);
+                    console.log(msg);
                 }
             });
         }
