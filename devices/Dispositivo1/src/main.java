@@ -5,26 +5,21 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import org.json.*;
 
 //Ar-condicionado
 public class main {
-
 	public static void main(String args[]) throws IOException, JSONException {
 		DatagramSocket serverSocket = new DatagramSocket(5000);
-
-		
-		String status = "Ligado";
-		int temperatura = 30;
 		String ip = InetAddress.getLocalHost().getHostAddress();
 		String porta = "5001";
+		int id = 3;
 		String tipo = "Ar-condicionado";
-		
-		
+		String status = "Ligado";
+		int temperatura = 30;
 
 		while (true) {
-			
+			////////////////// TESTANDO ENVIAR 
 			byte[] receiveData = new byte[1024];
 			byte[] sendData = new byte[1024];
 
@@ -39,7 +34,7 @@ public class main {
 
 			int port = receivePacket.getPort();
 
-			String x = "{'tipo':'Ar-condicionado', 'ip': '" + ip + "', 'porta':" + porta + ", 'acoes':{'status': '"
+			String x = "{'id': "+ id +", 'tipo':'Ar-condicionado', 'ip': '" + ip + "', 'porta':" + porta + ", 'acoes':{'status': '"
 					+ status + "', 'temperatura':" + temperatura + "}}";
 
 			sendData = x.getBytes();
@@ -52,8 +47,8 @@ public class main {
 			System.out.println("OK\n");
 			serverSocket.close();
 			
+			////////////////// TESTANDO RECEBER 
 			serverSocket = new DatagramSocket(5001);
-			
 			receiveData = new byte[1024];
 			sendData = new byte[1024];
 			
@@ -66,20 +61,13 @@ public class main {
 			JSONObject json = new JSONObject(sentence);
 			temperatura = json.getJSONObject("acoes").getInt("temperatura"); 
 			status = json.getJSONObject("acoes").getString("status");
-			x = "{'tipo':'Ar-condicionado', 'ip': '" + ip + "', 'porta':" + porta + ", 'acoes':{'status': '"
-					+ status + "', 'temperatura':" + temperatura + "}}";
+			// x = "{'tipo':'Ar-condicionado', 'ip': '" + ip + "', 'porta':" + porta + ", 'acoes':{'status': '"
+			// 		+ status + "', 'temperatura':" + temperatura + "}}";
 			System.out.print("Frase: " + x + "...");
 
 
 			serverSocket.close();
 			break;
-
 		}
-		
-		
-
-
-		
-
 	}
 }

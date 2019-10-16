@@ -17,7 +17,8 @@ Os tipos de mensagens a serem trocadas são:
 ---
 
 ### Execução
-
+ - Gerar os arquivos ProtocolBuffer
+ protoc -I=C:\Users\andre\Documents\escritorio-inteligente\protoBuf --js_out=C:\Users\andre\Documents\escritorio-inteligente\protoBuf device.protogit 
 1. tamtamatam
 2. tamtamatam
 3. tamtamatam
