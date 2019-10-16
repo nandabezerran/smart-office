@@ -8,6 +8,7 @@ message Device {
   optional int32 channel = 5;
   optional int32 volume = 6;
   optional float temperature = 7;
+  required string tipo = 8;
 }
 
 message DeviceList {

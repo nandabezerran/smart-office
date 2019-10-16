@@ -6,10 +6,12 @@ from threading import Timer
 import json
 from flask_cors import CORS
 import copy 
+from ..protoBuf.device_pb2 import Device, DeviceList
+
 app = Flask(__name__)
 CORS(app)
 
-devices = [{
+json_response_device = [{
         "tipo": "Ar-condicionado",
         "ip": "adosihdaiosddios",
         "id": "1",
@@ -46,12 +48,30 @@ devices = [{
         }
     }]
 
+
+
+
 @app.route('/getDevices', methods=['GET'])
 def get_devices():
     resultado = []
     for device in devices:
         dev = device
         resultado.append(dev)
+
+    #     devices = DeviceList()
+    # device = devices.devices.add()
+    # device.id = json_response_device['id']
+    # device.tipo = json_response_device['tipo']
+    # device.ip = json_response_device['ip']
+    # device.port = json_response_device['porta']
+    # device.status = json_response_device['status']
+
+    # if(json_response_device[0]['tipo'] == 'Ar-condicionado'){
+    #     device.temperatura = json_response_device['temperatura']
+    # } else if(json_response_device[0]['tipo'] == 'TV'){
+    #     device.canal = json_response_device['canal']
+    #     device.volume = json_response_device['volume']
+    # }
     return jsonify(resultado)
 
 

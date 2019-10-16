@@ -73,7 +73,8 @@ proto.Device.toObject = function(includeInstance, msg) {
     status: (f = jspb.Message.getField(msg, 4)) == null ? undefined : f,
     channel: (f = jspb.Message.getField(msg, 5)) == null ? undefined : f,
     volume: (f = jspb.Message.getField(msg, 6)) == null ? undefined : f,
-    temperature: (f = jspb.Message.getOptionalFloatingPointField(msg, 7)) == null ? undefined : f
+    temperature: (f = jspb.Message.getOptionalFloatingPointField(msg, 7)) == null ? undefined : f,
+    tipo: (f = jspb.Message.getField(msg, 8)) == null ? undefined : f
   };
 
   if (includeInstance) {
@@ -137,6 +138,10 @@ proto.Device.deserializeBinaryFromReader = function(msg, reader) {
     case 7:
       var value = /** @type {number} */ (reader.readFloat());
       msg.setTemperature(value);
+      break;
+    case 8:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setTipo(value);
       break;
     default:
       reader.skipField();
@@ -213,6 +218,13 @@ proto.Device.serializeBinaryToWriter = function(message, writer) {
   if (f != null) {
     writer.writeFloat(
       7,
+      f
+    );
+  }
+  f = /** @type {string} */ (jspb.Message.getField(message, 8));
+  if (f != null) {
+    writer.writeString(
+      8,
       f
     );
   }
@@ -468,6 +480,42 @@ proto.Device.prototype.clearTemperature = function() {
  */
 proto.Device.prototype.hasTemperature = function() {
   return jspb.Message.getField(this, 7) != null;
+};
+
+
+/**
+ * required string tipo = 8;
+ * @return {string}
+ */
+proto.Device.prototype.getTipo = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 8, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.Device} returns this
+ */
+proto.Device.prototype.setTipo = function(value) {
+  return jspb.Message.setField(this, 8, value);
+};
+
+
+/**
+ * Clears the field making it undefined.
+ * @return {!proto.Device} returns this
+ */
+proto.Device.prototype.clearTipo = function() {
+  return jspb.Message.setField(this, 8, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return {boolean}
+ */
+proto.Device.prototype.hasTipo = function() {
+  return jspb.Message.getField(this, 8) != null;
 };
 
 

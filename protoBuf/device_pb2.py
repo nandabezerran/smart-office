@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='',
   syntax='proto2',
   serialized_options=None,
-  serialized_pb=_b('\n\x0c\x64\x65vice.proto\"t\n\x06\x44\x65vice\x12\n\n\x02id\x18\x01 \x02(\x05\x12\n\n\x02ip\x18\x02 \x02(\t\x12\x0c\n\x04port\x18\x03 \x02(\x05\x12\x0e\n\x06status\x18\x04 \x02(\t\x12\x0f\n\x07\x63hannel\x18\x05 \x01(\x05\x12\x0e\n\x06volume\x18\x06 \x01(\x05\x12\x13\n\x0btemperature\x18\x07 \x01(\x02\"&\n\nDeviceList\x12\x18\n\x07\x64\x65vices\x18\x01 \x03(\x0b\x32\x07.Device')
+  serialized_pb=_b('\n\x0c\x64\x65vice.proto\"\x82\x01\n\x06\x44\x65vice\x12\n\n\x02id\x18\x01 \x02(\x05\x12\n\n\x02ip\x18\x02 \x02(\t\x12\x0c\n\x04port\x18\x03 \x02(\x05\x12\x0e\n\x06status\x18\x04 \x02(\t\x12\x0f\n\x07\x63hannel\x18\x05 \x01(\x05\x12\x0e\n\x06volume\x18\x06 \x01(\x05\x12\x13\n\x0btemperature\x18\x07 \x01(\x02\x12\x0c\n\x04tipo\x18\x08 \x02(\t\"&\n\nDeviceList\x12\x18\n\x07\x64\x65vices\x18\x01 \x03(\x0b\x32\x07.Device')
 )
 
 
@@ -82,6 +82,13 @@ _DEVICE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='tipo', full_name='Device.tipo', index=7,
+      number=8, type=9, cpp_type=9, label=2,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -94,8 +101,8 @@ _DEVICE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16,
-  serialized_end=132,
+  serialized_start=17,
+  serialized_end=147,
 )
 
 
@@ -125,8 +132,8 @@ _DEVICELIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=134,
-  serialized_end=172,
+  serialized_start=149,
+  serialized_end=187,
 )
 
 _DEVICELIST.fields_by_name['devices'].message_type = _DEVICE
