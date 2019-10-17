@@ -1,3 +1,4 @@
+
 //TODO: Possiveis mudanças nos tipos de envio e recebimento das msgs
 // var devices = [{
 //         "tipo": "Ar-condicionado",
@@ -40,7 +41,7 @@
 //     },
 
 // ];
-var devices = [];
+
 const server = "localhost:2000/"; //TODO: mudar dados do server aqui
 
 function search_devices() {
@@ -82,7 +83,7 @@ function setStatus(e, id) {
                 success: function(msg) {
                     console.log(msg);
                     $("#" + id).find(".change_status")[0].innerHTML = "  " + status;
-                    // atualizar_tela();
+                    atualizar_tela();
                 }
             });
         }
