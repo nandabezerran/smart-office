@@ -3,10 +3,10 @@ from flask import Flask, request, jsonify
 import collections
 from threading import Timer
 import json
-#from flask_cors import CORS
+from flask_cors import CORS
 import copy 
 app = Flask(__name__)
-#CORS(app)
+CORS(app)
 
 devices = []
 
@@ -112,7 +112,7 @@ if __name__ == '__main__':
         device = json.loads(msg)
         for dev in devices:
             if (device['id'] == dev['id']):
-                return
+                device = copy.copy(dev)
         devices.append(device)
 
     app.run(host='127.0.0.1', port='2000', debug=True)

@@ -104,18 +104,6 @@ public class main {
             System.out.println(sentence);
 
 
-
-//            System.out.print("Enviando " + x + "...");
-//            JSONObject json = new JSONObject(sentence);
-//            temperatura = json.getJSONObject("acoes").getInt("temperatura");
-//            status = json.getJSONObject("acoes").getString("status");
-//            // x = "{'tipo':'Ar-condicionado', 'ip': '" + ip + "', 'porta':" + porta + ", 'acoes':{'status': '"
-//            // 		+ status + "', 'temperatura':" + temperatura + "}}";
-//            System.out.print("Frase: ");
-
-
-//            serverSocket.close();
-//            break;
         }
     }
 }
