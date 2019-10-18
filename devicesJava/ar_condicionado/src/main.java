@@ -95,7 +95,7 @@ public class main {
 
         Timer timer = new Timer();
         long delay = 0;
-        long intevalPeriod = 1 * 9000;
+        long intevalPeriod = 1 * 50000;
         // schedules the task to be run in an interval
         timer.scheduleAtFixedRate(task, delay,	intevalPeriod);
 
@@ -111,7 +111,7 @@ public class main {
 
             JSONObject jsonObj = new JSONObject(new String(receivePacket.getData()));
             JSONObject acoes = (JSONObject)jsonObj.get("acoes");
-            temperatura[0] = Integer.parseInt((String)acoes.get("temperatura"));
+            temperatura[0] = (Integer)acoes.get("temperatura");
             status[0] = (String)acoes.get("status");
         }
     }

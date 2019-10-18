@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="400821b1-0535-4c73-ab98-9353233c36dc" name="Default Changelist" comment="" />
+    <list default="true" id="400821b1-0535-4c73-ab98-9353233c36dc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../ar_condicionado/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../ar_condicionado/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ar_condicionado/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../ar_condicionado/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tv/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../tv/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tv/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../tv/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../server/servertesteAtt.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/servertesteAtt.py" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,10 +82,11 @@
     <session id="-1139986398">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.0" value="2" />
+          <entry key="project.closed" value="6" />
+          <entry key="project.open.time.0" value="3" />
           <entry key="project.open.time.1" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -193,11 +201,14 @@
       <workItem from="1571277195401" duration="127000" />
       <workItem from="1571356797318" duration="4256000" />
       <workItem from="1571407352539" duration="2538000" />
+      <workItem from="1571416522121" duration="744000" />
+      <workItem from="1571419254430" duration="1200000" />
+      <workItem from="1571420630905" duration="226000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21464000" />
+    <option name="totallyTimeSpent" value="23634000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />

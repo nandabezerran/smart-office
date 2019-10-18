@@ -7,6 +7,8 @@ import json
 import copy 
 app = Flask(__name__)
 #CORS(app)
+import select
+
 
 devices = []
 
@@ -82,6 +84,7 @@ if __name__ == '__main__':
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    sock.setblocking(0)
 
     broacast_addr = (broadcast_ip, broadcast_port)
 
@@ -93,14 +96,20 @@ if __name__ == '__main__':
         print("enviou")
         sock.sendto(msg.encode(), broacast_addr)
 
+
+    sock.sendto(msg.encode(), broacast_addr)
     while True:
         # ------------ RECEIVE TO DEVICE
-        t = Timer(2.0, send_broadcast)
+        t = Timer(60.0, send_broadcast)
         t.start()
-        data, client = sock.recvfrom(1024)
-        client_server = data.decode("utf-8").replace("'", '"')
-        client_data = data.decode("utf-8").replace("'", '"')
-        decode_json(client_data)
+        timeout_in_seconds = 60
+        ready = select.select([sock], [], [], timeout_in_seconds)
+        if ready[0]:
+            print("entrou")
+            data, client = sock.recvfrom(1024)
+            client_server = data.decode("utf-8").replace("'", '"')
+            client_data = data.decode("utf-8").replace("'", '"')
+            decode_json(client_data)
 
 
 

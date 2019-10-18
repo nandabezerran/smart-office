@@ -66,7 +66,7 @@ public class main {
             JSONObject jsonObj = new JSONObject(new String(receivePacket.getData()));
             JSONObject acoes = (JSONObject)jsonObj.get("acoes");
             status = (String)acoes.get("status");
-            canal = (Integer) acoes.get("canal");
+            canal = (Integer)acoes.get("canal");
             volume = (Integer)acoes.get("volume");
 
         }
