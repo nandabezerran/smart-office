@@ -110,9 +110,9 @@ def change_volume(id, new_volume):
 if __name__ == '__main__':
     def decode_json(msg):
         device = json.loads(msg)
-        for dev in devices:
-            if (device['id'] == dev['id']):
-                dev = copy.copy(device)
+        for i in range (0, len(devices)):
+            if (devices[i]['id'] == device['id']):
+                devices[i] = copy.copy(device)
                 return
         devices.append(device)
 

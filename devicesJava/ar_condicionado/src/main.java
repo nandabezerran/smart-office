@@ -31,8 +31,9 @@ public class main {
         int id = 1;
         String tipo = "Ar-condicionado";
         String status = "Ligado";
-        final int[] temperatura = new int[0];
+        int temperatura[] = new int[1];
         temperatura[0] = 30;
+
 
         ////////////////// CONEXAO BROADCAST
         byte[] receiveData = new byte[1024];
@@ -71,7 +72,7 @@ public class main {
             @Override
             public void run() {
                 Random aleatorio = new Random();
-                        //temperatura[0] + (aleatorio.nextInt(2) - 1);
+                temperatura[0] = temperatura[0] + (aleatorio.nextInt(2) - 1);
                 System.out.print("temperatura eneviada\n");
                 String p = "{'id': "+ id +", 'tipo':'Ar-condicionado', 'ip': '" + ip + "', 'porta':" + porta + ", 'acoes':{'status': '"
                         + status + "', 'temperatura':" + temperatura[0] + "}}";
@@ -80,7 +81,7 @@ public class main {
 
                 sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
 
-                System.out.print("Enviando " + x + "...");
+                System.out.print("Enviando " + p + "...");
 
                 try {
                     socket.send(sendPacket);
@@ -98,7 +99,6 @@ public class main {
         timer.scheduleAtFixedRate(task, delay,	intevalPeriod);
 
         while (true) {
-
 
             ////////////////// TESTANDO RECEBER
             receiveData = new byte[1024];
