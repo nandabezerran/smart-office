@@ -65,7 +65,7 @@ def change_status(id, new_status):
             dev = copy.copy(device)
             dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
             # sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-            # sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
+            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
     return json.dumps(dev, separators=(',', ':'))
 
 
@@ -78,7 +78,7 @@ def change_temperatura(id, new_temp):
             dev = copy.copy(device)
             dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
             # sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-            # sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
+            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
     return json.dumps(dev, separators=(',', ':'))
 
 @app.route('/changeCanal/<string:id>/<string:new_canal>', methods=["PUT"])
@@ -145,10 +145,14 @@ if __name__ == '__main__':
         t = Timer(2.0, send_broadcast)
         t.start()
         data, client = sock.recvfrom(1024)
+        client_server = data.decode("utf-8").replace("'", '"')
         client_data = data.decode("utf-8").replace("'", '"')
         decode_json(client_data)
-
-
+        # resposta = "{id: 1, tipo : Ar-condicionado, ip: 192.168.0.9 , porta: 5001, acoes :{ status: desligado, temperatura: 40}}";
+        # # #so para teste, depois tirar
+        # dado = json.loads(client_server)
+        # print(int(dado['porta']))
+        # sock.sendto(resposta.encode(), (dado['ip'],int(dado['porta'])))
 
 
 
