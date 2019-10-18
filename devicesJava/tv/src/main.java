@@ -50,7 +50,7 @@ public class main {
 
         serverSocket.send(sendPacket);
         System.out.println("OK\n");
-        serverSocket.close();
+        //serverSocket.close();
         serverSocket = new DatagramSocket(5003);
 
 

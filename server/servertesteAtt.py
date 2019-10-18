@@ -3,10 +3,10 @@ from flask import Flask, request, jsonify
 import collections
 from threading import Timer
 import json
-from flask_cors import CORS
+#from flask_cors import CORS
 import copy 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 
 devices = []
 
@@ -112,7 +112,8 @@ if __name__ == '__main__':
         device = json.loads(msg)
         for dev in devices:
             if (device['id'] == dev['id']):
-                device = copy.copy(dev)
+                dev = copy.copy(device)
+                return
         devices.append(device)
 
     app.run(host='127.0.0.1', port='2000', debug=True)
@@ -137,20 +138,20 @@ if __name__ == '__main__':
         print("enviou")
         sock.sendto(msg.encode(), broacast_addr)
 
-    sock.sendto(msg.encode(), broacast_addr)
+    #sock.sendto(msg.encode(), broacast_addr)
 
     while True:
         # ------------ RECEIVE TO DEVICE
-        t = Timer(20.0, send_broadcast)
+        t = Timer(2.0, send_broadcast)
         t.start()
         data, client = sock.recvfrom(1024)
-        dados_servidor = data.decode("utf-8").replace("'", '"')
-        data_dec = data.decode("utf-8").replace("'", '"')
-        print(data_dec)
-        decode_json(data_dec)
-        # addr_client = json.loads(data_dec)
+        client_server = data.decode("utf-8").replace("'", '"')
+        client_data = data.decode("utf-8").replace("'", '"')
+        decode_json(client_data)
         resposta = "Conexão estabelecida com a nova porta"
-        dado = json.loads(dados_servidor)
+
+        #so para teste, depois tirar
+        dado = json.loads(client_server)
         print(int(dado['porta']))
         sock.sendto(resposta.encode(), (dado['ip'],int(dado['porta'])))
         print("mensagem enviada")
