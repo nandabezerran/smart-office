@@ -82,7 +82,7 @@ public class main {
 
                 sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
 
-                System.out.print("Enviando " + p + "...");
+                System.out.print("Enviando " + p + "...\n");
 
                 try {
                     socket.send(sendPacket);
@@ -106,12 +106,12 @@ public class main {
             sendData = new byte[1024];
 
             receivePacket = new DatagramPacket(receiveData, receiveData.length);
-            System.out.println("Esperando por datagrama UDP na porta " + 5001);
+            System.out.println("Esperando por datagrama UDP na porta " + 5001 + "\n");
             socket.receive(receivePacket);
 
             JSONObject jsonObj = new JSONObject(new String(receivePacket.getData()));
             JSONObject acoes = (JSONObject)jsonObj.get("acoes");
-            temperatura[0] = (int)acoes.get("temperatura");
+            temperatura[0] = Integer.parseInt((String)acoes.get("temperatura"));
             status[0] = (String)acoes.get("status");
         }
     }

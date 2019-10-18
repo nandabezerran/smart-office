@@ -23,8 +23,6 @@ def get_devices():
 def change_status(id, new_status):
     dev = None
     for device in devices:
-        print(device['id'])
-        print(id)
         if(int(device['id']) == int(id)):
             device["acoes"]["status"] = str(new_status)
             sock.sendto(json.dumps(device).encode(), (device['ip'], int(device['porta'])))
@@ -37,7 +35,7 @@ def change_temperatura(id, new_temp):
     dev = None
     for device in devices:
         if(int(device['id']) == int(id)):
-            device["acoes"]["temperatura"] = str(new_temp)
+            device["acoes"]["temperatura"] = int(new_temp)
             sock.sendto(json.dumps(device).encode(), (device['ip'], int(device['porta'])))
             return json.dumps(device, separators=(',', ':'))
     return 'Dispositivo nao encontrado', 502
@@ -47,7 +45,7 @@ def change_canal(id, new_canal):
     dev = None
     for device in devices:
         if(int(device['id']) == int(id)):
-            device["acoes"]["canal"] = str(new_canal)
+            device["acoes"]["canal"] = int(new_canal)
             sock.sendto(json.dumps(device).encode(), (device['ip'], int(device['porta'])))
             return json.dumps(device, separators=(',', ':'))
     return 'Dispositivo nao encontrado', 502
@@ -58,7 +56,7 @@ def change_volume(id, new_volume):
     dev = None
     for device in devices:
         if(int(device['id']) == int(id)):
-            device["acoes"]["volume"] = str(new_volume)
+            device["acoes"]["volume"] = int(new_volume)
             sock.sendto(json.dumps(device).encode(), (device['ip'], int(device['porta'])))
             return json.dumps(device, separators=(',', ':'))
     return 'Dispositivo nao encontrado',502

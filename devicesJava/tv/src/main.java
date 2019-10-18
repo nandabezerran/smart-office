@@ -58,15 +58,16 @@ public class main {
 
             ////////////////// TESTANDO RECEBER
             receiveData = new byte[1024];
-            sendData = new byte[1024];
 
             receivePacket = new DatagramPacket(receiveData, receiveData.length);
             System.out.println("Esperando por datagrama UDP na porta " + porta);
             serverSocket.receive(receivePacket);
 
-            sentence = new String(receivePacket.getData());
-            System.out.println(sentence);
-
+            JSONObject jsonObj = new JSONObject(new String(receivePacket.getData()));
+            JSONObject acoes = (JSONObject)jsonObj.get("acoes");
+            status = (String)acoes.get("status");
+            canal = (Integer) acoes.get("canal");
+            volume = (Integer)acoes.get("volume");
 
         }
     }

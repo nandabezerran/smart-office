@@ -18,10 +18,8 @@ public class main {
 
         String porta = "5002";
         int id = 2;
-        String tipo = "TV";
+        String tipo = "lampada";
         String status = "Ligado";
-        int canal = 30;
-        int volume = 30;
 
 
         ////////////////// CONEXAO BROADCAST
@@ -57,16 +55,16 @@ public class main {
         while (true) {
 
             ////////////////// TESTANDO RECEBER
+
             receiveData = new byte[1024];
-            sendData = new byte[1024];
 
             receivePacket = new DatagramPacket(receiveData, receiveData.length);
             System.out.println("Esperando por datagrama UDP na porta " + porta);
             serverSocket.receive(receivePacket);
 
-            sentence = new String(receivePacket.getData());
-            System.out.println(sentence);
-
+            JSONObject jsonObj = new JSONObject(new String(receivePacket.getData()));
+            JSONObject acoes = (JSONObject)jsonObj.get("acoes");
+            status = (String)acoes.get("status");
 
         }
     }
