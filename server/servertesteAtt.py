@@ -145,16 +145,10 @@ if __name__ == '__main__':
         t = Timer(2.0, send_broadcast)
         t.start()
         data, client = sock.recvfrom(1024)
-        client_server = data.decode("utf-8").replace("'", '"')
         client_data = data.decode("utf-8").replace("'", '"')
         decode_json(client_data)
-        resposta = "Conexão estabelecida com a nova porta"
 
-        #so para teste, depois tirar
-        dado = json.loads(client_server)
-        print(int(dado['porta']))
-        sock.sendto(resposta.encode(), (dado['ip'],int(dado['porta'])))
-        print("mensagem enviada")
+
 
 
 

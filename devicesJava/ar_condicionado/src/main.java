@@ -30,7 +30,8 @@ public class main {
         String porta = "5001";
         int id = 1;
         String tipo = "Ar-condicionado";
-        String status = "Ligado";
+        String status[] = new String[1];
+        status[0] = "Ligado";
         int temperatura[] = new int[1];
         temperatura[0] = 30;
 
@@ -50,7 +51,7 @@ public class main {
         int port = receivePacket.getPort();
 
         String x = "{'id': "+ id +", 'tipo':'Ar-condicionado', 'ip': '" + ip + "', 'porta':" + porta + ", 'acoes':{'status': '"
-                + status + "', 'temperatura':" + temperatura[0] + "}}";
+                + status[0] + "', 'temperatura':" + temperatura[0] + "}}";
 
         sendData = x.getBytes();
 
@@ -75,7 +76,7 @@ public class main {
                 temperatura[0] = temperatura[0] + (aleatorio.nextInt(2) - 1);
                 System.out.print("temperatura eneviada\n");
                 String p = "{'id': "+ id +", 'tipo':'Ar-condicionado', 'ip': '" + ip + "', 'porta':" + porta + ", 'acoes':{'status': '"
-                        + status + "', 'temperatura':" + temperatura[0] + "}}";
+                        + status[0] + "', 'temperatura':" + temperatura[0] + "}}";
 
                 sendData = p.getBytes();
 
@@ -108,10 +109,11 @@ public class main {
             System.out.println("Esperando por datagrama UDP na porta " + 5001);
             socket.receive(receivePacket);
 
-            sentence = new String(receivePacket.getData());
-            System.out.println(sentence);
-
-
+            JSONObject jsonObj = new JSONObject(x);
+            System.out.println("Aqui \n");
+            JSONObject acoes = (JSONObject)jsonObj.get("acoes");
+            temperatura[0] = (int)acoes.get("temperatura");
+            status[0] = (String)acoes.get("status");
         }
     }
 }

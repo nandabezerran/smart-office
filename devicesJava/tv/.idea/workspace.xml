@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="400821b1-0535-4c73-ab98-9353233c36dc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="400821b1-0535-4c73-ab98-9353233c36dc" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +88,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
+            <state relative-caret-position="231">
               <caret line="53" column="46" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="46" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -202,12 +200,12 @@
       <workItem from="1571251707233" duration="7158000" />
       <workItem from="1571262408134" duration="4819000" />
       <workItem from="1571277206765" duration="118000" />
-      <workItem from="1571356782106" duration="1217000" />
+      <workItem from="1571356782106" duration="2022000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14867000" />
+    <option name="totallyTimeSpent" value="15672000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -222,7 +220,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.5078014" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.5078014" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -259,7 +257,7 @@
     <entry file="file://$PROJECT_DIR$/src/ar_condicionado.java" />
     <entry file="file://$PROJECT_DIR$/src/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
+        <state relative-caret-position="231">
           <caret line="53" column="46" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="46" />
           <folding>
             <element signature="imports" expanded="true" />
