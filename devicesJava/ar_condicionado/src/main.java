@@ -110,8 +110,6 @@ public class main {
             socket.receive(receivePacket);
 
             JSONObject jsonObj = new JSONObject(new String(receivePacket.getData()));
-            System.out.println("chegou");
-            System.out.println( new String(receivePacket.getData()) +"\n");
             JSONObject acoes = (JSONObject)jsonObj.get("acoes");
             temperatura[0] = (int)acoes.get("temperatura");
             status[0] = (String)acoes.get("status");

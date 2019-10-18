@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="400821b1-0535-4c73-ab98-9353233c36dc" name="Default Changelist" comment="" />
+    <list default="true" id="400821b1-0535-4c73-ab98-9353233c36dc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../server/servertesteAtt.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../server/servertesteAtt.py" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +77,7 @@
     <session id="-1139986398">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.opened" value="2" />
@@ -98,7 +100,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
+            <state relative-caret-position="504">
               <caret line="66" column="58" lean-forward="true" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -191,16 +193,15 @@
       <workItem from="1571251707233" duration="7158000" />
       <workItem from="1571262398884" duration="5830000" />
       <workItem from="1571277195401" duration="127000" />
-      <workItem from="1571356797318" duration="4249000" />
+      <workItem from="1571356797318" duration="4256000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18919000" />
+    <option name="totallyTimeSpent" value="18926000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.0" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -211,7 +212,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43546098" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.43546098" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -301,7 +302,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
+        <state relative-caret-position="504">
           <caret line="66" column="58" lean-forward="true" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="58" />
           <folding>
             <element signature="imports" expanded="true" />

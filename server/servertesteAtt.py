@@ -60,13 +60,16 @@ def get_devices():
 def change_status(id, new_status):
     dev = None
     for device in devices:
-        if(device['id'] == id):
+        print(device['id'])
+        print(id)
+        if(int(device['id']) == int(id)):
             device["acoes"]["status"] = str(new_status)
-            dev = copy.copy(device)
-            dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
+            print(device)
+            #dev = copy.copy(device)
+            #dev['acoes'] = json.dumps(dev['acoes'], separators=(',', ':'))
             # sock = socket.socket(socket.AF_INET,  socket.SOCK_DGRAM)
-            sock.sendto(json.dumps(dev).encode(), (device['ip'], device['porta']))
-    return json.dumps(dev, separators=(',', ':'))
+            sock.sendto(json.dumps(device).encode(), (device['ip'], int(device['porta'])))
+    return json.dumps(device, separators=(',', ':'))
 
 
 @app.route('/changeTemp/<string:id>/<string:new_temp>', methods=["PUT"])
