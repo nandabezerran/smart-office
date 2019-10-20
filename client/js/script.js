@@ -1,45 +1,3 @@
-//TODO: Possiveis mudanças nos tipos de envio e recebimento das msgs
-// var devices = [{
-//         "tipo": "Ar-condicionado",
-//         "ip": "adosihdaiosddios",
-//         "id": "1",
-//         "porta": 3000,
-//         "acoes": {
-//             "status": "Ligado",
-//             "temperatura": 30,
-//         }
-//     },
-//     {
-//         "tipo": "TV",
-//         "ip": "adosihdaiosddios",
-//         "id": "2",
-//         "porta": 3000,
-//         "acoes": {
-//             "status": "Ligado",
-//             "canal": 30,
-//             "volume": 20
-//         }
-//     },
-//     {
-//         "tipo": "Lâmpada",
-//         "ip": "adosihdaiosddios",
-//         "id": "3",
-//         "porta": 3000,
-//         "acoes": {
-//             "status": "Ligado",
-//         }
-//     },
-//     {
-//         "tipo": "Lâmpada",
-//         "ip": "adosihdaiosddios",
-//         "id": "5",
-//         "porta": 3000,
-//         "acoes": {
-//             "status": "Desligado", // true: ligado e false: desligado
-//         }
-//     },
-
-// ];
 var devices = [];
 const server = "localhost:2000/"; //TODO: mudar dados do server aqui
 
@@ -80,9 +38,8 @@ function setStatus(e, id) {
                     xhr.withCredentials = true;
                 },
                 success: function(msg) {
-                    console.log(msg);
+                    // console.log(msg);
                     $("#" + id).find(".change_status")[0].innerHTML = "  " + status;
-                    // atualizar_tela();
                 }
             });
         }
@@ -91,7 +48,6 @@ function setStatus(e, id) {
 
 function setCanal(e, id) {
     var canal = e.target.value;
-    // console.log(canal);
     devices.forEach((device, index) => {
         if (device["id"] == id) {
             device.acoes.canal = canal;
@@ -108,7 +64,7 @@ function setCanal(e, id) {
                     xhr.withCredentials = true;
                 },
                 success: function(msg) {
-                    console.log(msg);
+                    // console.log(msg);
                 }
             });
         }
@@ -117,7 +73,6 @@ function setCanal(e, id) {
 
 function setVolume(e, id) {
     var volume = e.target.value;
-
     devices.forEach((device, index) => {
         if (device["id"] == id) {
             device.acoes.volume = volume;
@@ -134,7 +89,7 @@ function setVolume(e, id) {
                     xhr.withCredentials = true;
                 },
                 success: function(msg) {
-                    console.log(msg);
+                    // console.log(msg);
                 }
             });
         }
@@ -160,7 +115,7 @@ function setTemperatura(e, id) {
                     xhr.withCredentials = true;
                 },
                 success: function(msg) {
-                    console.log(msg);
+                    // console.log(msg);
                 }
             });
         }
@@ -184,7 +139,6 @@ function gerar_componente_device(device, id_linha) {
 
     if (device.tipo === 'Ar-condicionado') {
         $("#" + id_linha).append("<div class='col-md-5 mx-auto card' id='" + device.id + "'>" +
-            // "<div class='row'>" +
             "<img src = './img/ar-condicionado.png' class='img_devices'>" +
             "<div>" +
             "<h3 class='text-center tipo-device'>" + device.tipo + "</h3></br>" +
@@ -206,11 +160,11 @@ function gerar_componente_device(device, id_linha) {
             "</div>" +
             "</div>"
         );
-    } else if (device.tipo === 'Lâmpada') {
+    } else if (device.tipo === 'lampada') {
         $("#" + id_linha).append("<div class='col-md-5 mx-auto card' id='" + device.id + "'>" +
             "<img src = './img/lampada.png' class='img_devices'>" +
             "<div>" +
-            "<h3 class='text-center tipo-device'>" + device.tipo + "</h3></br>" +
+            "<h3 class='text-center tipo-device'>Lâmpada</h3></br>" +
             "<p><strong>STATUS:</strong><span class='change_status'> " + device.acoes.status + "</span></p>" +
             "</div>" +
             "<div>" +
