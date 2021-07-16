@@ -1,18 +1,19 @@
-# escritorio-inteligente
+# smart-office
 
-Projeto desenvolvido na disciplina de Sistemas Distribuídos, Departamento de Computação, Universidade Federal do Ceará, com o objetivo de elaborar um ambiente inteligente que possa ser controlado por uma aplicação web.
+Project developed at the Distributed Systems course, the objective of this is to create a smart environment that can be controled by a web aplication.
 
-O ambiente escolhido é composto de dispositivos tais como TV, ar-condicionado e lâmpada, onde os sensores desses dispositivos são simulados por programas.
+The choosen environment is composed by a couple of devices as a TV, light-bulb and an air-conditioner where the sensors are simulated by programs.
 
-A estrutura desse projeto é composto pela aplicação web, um servidor/gateway que é encarregado de fazer o meio-termo entre os dispositivos e o cliente, e os dispositivos inteligentes.
+The architecture of this project is composed by a web aplication, a server/gateway that makes the connection between the devices and the client and the smart dispositives.
 
 ---
 
-### Mensagens
+### Mensages 
 
-As mensagens são feitas em JSON entre cliente e servidor, e entre servidor e devices com strings.
+It is used a JSON to make the communication between the client and server, and the communication between server and devices it is used strings.
 
-O formato de mensagem elaborado foi, por exemplo, no caso do ar-condicionado:
+Example used for the air-conditioner:
+
 {	tipo: ‘Ar-condicionado’,
 	ip: ‘127.0.0.1’,
 	porta: 3000,
@@ -27,7 +28,7 @@ Infelimente, tentamos realizar a comunicação entre cliente e servidor mas não
 
 ---
 
-### Dependências
+### Dependeces
 
 - pip install flask
 - pip install flask-cors
@@ -36,13 +37,13 @@ Infelimente, tentamos realizar a comunicação entre cliente e servidor mas não
 ---
 ### Execução
 
-#### Execução devices
+#### Devices execution
 1. Use alguma IDE, como o IntelliJ e adicione o pacote java-json.jar como dependência do projeto seguindo as instruções em: https://stackoverflow.com/questions/1051640/correct-way-to-add-external-jars-lib-jar-to-an-intellij-idea-project.
 2. Em seguida, basta rodar a aplicação, conforme a IDE.
 
-#### Execução server
+#### Server execution
 1. No terminal, execute: python server/server.py
 
-#### Execução cliente
+#### Client execution
  1. Basta abrir o arquivo client/index.html em seu browser, ou se preferir, instanciar um servidor na pasta em uma porta, por exemplo com Python através de python -m http.server PORTA, e então em seu browser abrir localhost:porta/
 
